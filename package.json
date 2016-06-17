@@ -1,0 +1,22 @@
+{
+  "name": "conlog",
+  "version": "0.0.1",
+  "description": "Contest Log Converter",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "eslint lib/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drom/conlog.git"
+  },
+  "author": "Aliaksei Chapyzhenka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/drom/conlog/issues"
+  },
+  "homepage": "https://github.com/drom/conlog#readme",
+  "devDependencies": {
+    "eslint": "^2.12.0"
+  }
+}

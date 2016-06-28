@@ -4,7 +4,7 @@
   "description": "Contest Log Converter",
   "main": "lib/index.js",
   "scripts": {
-    "test": "eslint lib/*.js"
+    "test": "eslint lib/*.js && istanbul cover _mocha test"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/drom/conlog#readme",
   "devDependencies": {
-    "eslint": "^2.12.0"
+    "chai": "^3.5.0",
+    "eslint": "^2.12.0",
+    "istanbul": "^0.4.4",
+    "mocha": "^2.5.3",
+    "yargs": "^4.7.1"
   }
 }

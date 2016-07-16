@@ -1,0 +1,160 @@
+#!/usr/bin/env node
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+
+'use strict';
+
+var fs = require('fs'),
+    path = require('path'),
+    lib = require('../lib');
+
+var argv = process.argv;
+
+// console.log(argv);
+
+if (argv.length === 3) {
+    var fileName = argv[2];
+    var fullFileName = path.resolve(process.cwd(), fileName);
+    fs.readFile(fullFileName, 'utf8', function (err, data) {
+        if (err) { throw err; }
+        // read adif
+        var table = lib.read.adif(data);
+        // console.log(table);
+        var tablePerFreq = lib.perFreq(table.reverse());
+        // write edi files
+        Object.keys(tablePerFreq).forEach(function (t) {
+            var edi = lib.write.edi(tablePerFreq[t]);
+            var outputFileName = t + '.edi';
+            var fullOutputFileName = path.resolve(process.cwd(), outputFileName);
+            fs.writeFile(
+                fullOutputFileName,
+                edi,
+                function (err) {
+                    if (err) { throw err; }
+                }
+            )
+        });
+    });
+}
+
+},{"../lib":2,"fs":undefined,"path":undefined}],2:[function(require,module,exports){
+'use strict';
+
+var readAdif = require('./read-adif'),
+    writeEdi = require('./write-edi'),
+    perFreq = require('./per-freq');
+
+module.exports = {
+    read: { adif: readAdif },
+    write: { edi: writeEdi },
+    perFreq: perFreq
+};
+
+},{"./per-freq":3,"./read-adif":4,"./write-edi":5}],3:[function(require,module,exports){
+'use strict';
+
+function perFreq (table) {
+    var res = {};
+    table.forEach(function (record) {
+        var freq = record.FREQ;
+        if (res[freq] === undefined) {
+            res[freq] = [];
+        }
+        res[freq].push(record);
+    });
+    return res;
+}
+
+module.exports = perFreq;
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+var token = /<(\w+)(:(\d+))?>/;
+
+// EOH|EOR
+
+function parse (str) {
+    var res, i, a, m, len, val, text, state, obj;
+
+    if (str === undefined) { return []; }
+    if (typeof str === 'number') { return [str + '']; }
+    if (typeof str !== 'string') { return [str]; }
+    res = [];
+    while (true) {
+        i = str.search(token);
+        if (i === -1) {
+            res.push({ text: str });
+            return res;
+        }
+        if (i > 0) {
+            a = str.slice(0, i);
+        }
+        m = str.match(token);
+        len = m[3] || 0;
+        text = str.slice(0, i);
+        str = str.slice(i + m[0].length);
+        obj = {
+            text: text,
+            key: m[1]
+        };
+        if (len) {
+            obj.val = str.slice(0, Number(len));
+            str = str.slice(len);
+        }
+        res.push(obj);
+        if (str.length === 0) { return res; }
+    }
+}
+
+function convert (arr) {
+    var obj, res;
+    res = [];
+    obj = {};
+    arr.forEach(function (e) {
+        if (e.key === 'EOR') {
+            res.push(obj);
+            obj = {};
+        } else {
+            obj[e.key] = e.val;
+        }
+    });
+    return res;
+}
+
+function read (str) {
+    return convert(parse(str));
+}
+
+module.exports = read;
+
+},{}],5:[function(require,module,exports){
+'use strict';
+
+function write (table) {
+    var res = '';
+    res += '[QSORecords;' + table.length + ']\n';
+    table.forEach(function (r) {
+        res += [
+            r.QSO_DATE, // Date = YYMMDD, 6 characters 6
+            r.TIME_ON, // Time = UTC, 4 characters, with leading zeros 4
+            r.CALL, // Call = 3 to 14 characters 14
+            r.MODE, // Mode code = 0 or 1 character 1
+            r.RST_SENT, // Sent-RST = 0 or 2 or 3 characters 3
+            '', // Sent QSO number = 0 or 3 or 4 characters, with leading zeros 4
+            r.RST_RCVD, // Received-RST = 0 or 2 or 3 characters 3
+            '', // Received QSO number = 0 or 3 or 4 characters, with leading zeros 4
+            '', // Received Exchange = 0 or 1 to 6 characters (see also PExch) 6
+            '', // Received WWL = 0 or 4 or 6 characters, World Wide Locator 6
+            '', // QSO points = 1 to 6 characters, including bandmultiplier 6
+            '', // New-Exchange = 0 or 1 character, "N" if QSO is a new exchange 1
+            '', // New-WWL = 0 or 1 character, "N" if QSO is a new WWL 1
+            '', // New-DXCC = 0 or 1 character, "N" if QSO is a new DXCCL 1
+            '', // Duplicate-QSO = 0 or 1 character, "D" if contact is a duplicate QSO 1
+        ].join(';') + '\n';
+    });
+    return res;
+}
+
+module.exports = write;
+
+},{}]},{},[1]);

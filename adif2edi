@@ -49,7 +49,27 @@ module.exports = {
     perFreq: perFreq
 };
 
-},{"./per-freq":3,"./read-adif":4,"./write-edi":5}],3:[function(require,module,exports){
+},{"./per-freq":4,"./read-adif":5,"./write-edi":6}],3:[function(require,module,exports){
+'use strict';
+
+function mode (str) {
+    var modes = {
+        "SSB": 1,
+        "CW": 2,
+        "SSB": 3,
+        // "CW": 4,
+        "AM": 5,
+        "FM": 6,
+        "RTTY": 7,
+        "SSTV": 8,
+        "ATV": 9
+    };
+    return modes[str] || 0;
+}
+
+module.exports = mode;
+
+},{}],4:[function(require,module,exports){
 'use strict';
 
 function perFreq (table) {
@@ -66,7 +86,7 @@ function perFreq (table) {
 
 module.exports = perFreq;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var token = /<(\w+)(:(\d+))?>/;
@@ -127,27 +147,29 @@ function read (str) {
 
 module.exports = read;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
+
+var mode = require('./mode');
 
 function write (table) {
     var res = '';
     res += '[QSORecords;' + table.length + ']\n';
     table.forEach(function (r) {
         res += [
-            r.QSO_DATE, // Date = YYMMDD, 6 characters 6
+            r.QSO_DATE.slice(-6), // Date = YYMMDD, 6 characters 6
             r.TIME_ON, // Time = UTC, 4 characters, with leading zeros 4
             r.CALL, // Call = 3 to 14 characters 14
-            r.MODE, // Mode code = 0 or 1 character 1
+            mode(r.MODE), // Mode code = 0 or 1 character 1
             r.RST_SENT, // Sent-RST = 0 or 2 or 3 characters 3
             '', // Sent QSO number = 0 or 3 or 4 characters, with leading zeros 4
             r.RST_RCVD, // Received-RST = 0 or 2 or 3 characters 3
             '', // Received QSO number = 0 or 3 or 4 characters, with leading zeros 4
             '', // Received Exchange = 0 or 1 to 6 characters (see also PExch) 6
-            '', // Received WWL = 0 or 4 or 6 characters, World Wide Locator 6
-            '', // QSO points = 1 to 6 characters, including bandmultiplier 6
+            r.QTH, // Received WWL = 0 or 4 or 6 characters, World Wide Locator 6
+            '1', // QSO points = 1 to 6 characters, including bandmultiplier 6
             '', // New-Exchange = 0 or 1 character, "N" if QSO is a new exchange 1
-            '', // New-WWL = 0 or 1 character, "N" if QSO is a new WWL 1
+            'N', // New-WWL = 0 or 1 character, "N" if QSO is a new WWL 1
             '', // New-DXCC = 0 or 1 character, "N" if QSO is a new DXCCL 1
             '', // Duplicate-QSO = 0 or 1 character, "D" if contact is a duplicate QSO 1
         ].join(';') + '\n';
@@ -157,4 +179,4 @@ function write (table) {
 
 module.exports = write;
 
-},{}]},{},[1]);
+},{"./mode":3}]},{},[1]);

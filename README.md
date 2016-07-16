@@ -16,5 +16,5 @@ ADIF -> EDI converter
   3. Run with your report
 
 ```
-adif2edi MyLog.adif
+./adif2edi MyLog.adif
 ```

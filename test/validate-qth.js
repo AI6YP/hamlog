@@ -14,8 +14,15 @@ describe('valid QTH', function () {
 });
 
 describe('invalid QTH', function () {
-    'KO24F KO4RC KOa14XV KO04F0 KO3_1LG 134534klh1345'
+    'ko24fo ..KO24FO KO24FO.. KO24F KO4RC KOa14XV KO04F0 KO3_1LG 134534klh1345'
     .split(' ')
+    .forEach(function (qth) {
+        it(qth, function () {
+            expect(validateQTH(qth)).to.eq(null);
+        });
+    });
+    'K O 2 4 F O'
+    .split(',')
     .forEach(function (qth) {
         it(qth, function () {
             expect(validateQTH(qth)).to.eq(null);

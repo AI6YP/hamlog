@@ -4,7 +4,7 @@
   "description": "Contest Log Converter",
   "main": "lib/index.js",
   "scripts": {
-    "test": "eslint lib/*.js && nyc test",
+    "test": "eslint lib/*.js && nyc mocha test",
     "build": "browserify bin/adif2edi.js --node -o tmp && cat lib/header tmp > adif2edi"
   },
   "repository": {

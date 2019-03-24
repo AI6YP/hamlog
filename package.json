@@ -4,7 +4,7 @@
   "description": "Contest Log Converter",
   "main": "lib/index.js",
   "scripts": {
-    "test": "eslint lib/*.js && istanbul cover _mocha test",
+    "test": "eslint lib/*.js && nyc test",
     "build": "browserify bin/adif2edi.js --node -o tmp && cat lib/header tmp > adif2edi"
   },
   "repository": {
@@ -18,12 +18,16 @@
   },
   "homepage": "https://github.com/drom/conlog#readme",
   "devDependencies": {
-    "browserify": "^13.0.1",
-    "chai": "^3.5.0",
-    "eslint": "^2.12.0",
-    "fs-extra": "^0.30.0",
-    "istanbul": "^0.4.4",
-    "mocha": "^2.5.3",
-    "yargs": "^4.7.1"
+    "@drom/eslint-config": "^0.9.0",
+    "browserify": "^16.2.3",
+    "chai": "^4.2.0",
+    "eslint": "^5.15.3",
+    "fs-extra": "^7.0.1",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
+    "yargs": "^13.2.2"
+  },
+  "eslintConfig": {
+    "extends": "@drom/eslint-config/eslint4/node4"
   }
 }

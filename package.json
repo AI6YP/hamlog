@@ -1,5 +1,5 @@
 {
-  "name": "conlog",
+  "name": "hamlog",
   "version": "0.3.0",
   "description": "Contest Log Converter",
   "main": "lib/index.js",

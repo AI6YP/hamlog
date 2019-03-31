@@ -260,9 +260,9 @@ TT                        | Chad                             | AF    | 47    | 3
 TU                        | Cote d'Ivoire                    | AF    | 46    | 35    | 428
 TY                        | Benin                            | AF    | 46    | 35    | 416
 TZ                        | Mali                             | AF    | 46    | 35    | 442
-U{A-I}{1-7}, RA-RZ        | European Russia                  | EU    | (E)   | 16    | 054
+U{A-I}{1-7}, R            | European Russia                  | EU    | (E)   | 16    | 054
 UA2, RA2                  | Kaliningrad                      | EU    | 29    | 15    | 126
-U{A-I}{8-9},U{A-I}0,RA-RZ | Asiatic Russia                   | AS    | (F)   | (G)   | 015
+U{A-I}{8-9},U{A-I}0,R     | Asiatic Russia                   | AS    | (F)   | (G)   | 015
 UJ-UM                     | Uzbekistan                       | AS    | 30    | 17    | 292
 UN-UQ                     | Kazakhstan                       | AS    | 29-31 | 17    | 130
 UR-UZ, EM-EO              | Ukraine                          | EU    | 29    | 16    | 288

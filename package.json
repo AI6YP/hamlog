@@ -31,6 +31,6 @@
     "yargs": "^13.2.2"
   },
   "eslintConfig": {
-    "extends": "@drom/eslint-config/eslint4/node4"
+    "extends": "@drom/eslint-config/eslint4/node8"
   }
 }

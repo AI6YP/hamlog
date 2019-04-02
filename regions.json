@@ -46,7 +46,7 @@
 { "type": "Feature", "properties": { "sr_subunit": "South Africa", "sr_brk_a3": "ZAX", "sr_adm0_a3": "ZAF", "scalerank": 0 }, "geometry": { "type": "Point", "coordinates": [ 25.159241529772942, -29.009215741912783 ] } },
 { "type": "Feature", "properties": { "sr_subunit": "Somalia", "sr_brk_a3": "SOX", "sr_adm0_a3": "SOM", "scalerank": 0 }, "geometry": { "type": "Point", "coordinates": [ 43.578106626419867, 2.790000309466848 ] } },
 { "type": "Feature", "properties": { "sr_subunit": "Slovenia", "sr_brk_a3": "SVN", "sr_adm0_a3": "SVN", "scalerank": 0 }, "geometry": { "type": "Point", "coordinates": [ 14.940281412357479, 46.063557686138495 ] } },
-{ "type": "Feature", "properties": { "sr_subunit": "Slovakia", "sr_brk_a3": "SVK", "sr_adm0_a3": "SVK", "scalerank": 0 }, "geometry": { "type": "Point", "coordinates": [ 19.480382926131313, 48.704935088084028 ] } },
+{ "type": "Feature", "properties": { "sr_subunit": "Slovak", "sr_brk_a3": "SVK", "sr_adm0_a3": "SVK", "scalerank": 0 }, "geometry": { "type": "Point", "coordinates": [ 19.480382926131313, 48.704935088084028 ] } },
 { "type": "Feature", "properties": { "sr_subunit": "Sierra Leone", "sr_brk_a3": "SLE", "sr_adm0_a3": "SLE", "scalerank": 0 }, "geometry": { "type": "Point", "coordinates": [ -11.787342431307991, 8.571908878192346 ] } },
 { "type": "Feature", "properties": { "sr_subunit": "Senegal", "sr_brk_a3": "SEN", "sr_adm0_a3": "SEN", "scalerank": 0 }, "geometry": { "type": "Point", "coordinates": [ -14.471307705386153, 14.367788720673104 ] } },
 { "type": "Feature", "properties": { "sr_subunit": "Saudi Arabia", "sr_brk_a3": "SAU", "sr_adm0_a3": "SAU", "scalerank": 0 }, "geometry": { "type": "Point", "coordinates": [ 44.539708064176011, 24.124191728465632 ] } },

@@ -114,7 +114,7 @@ EU-EW                     | Belarus                          | EU    | 29    | 1
 EX                        | Kyrgyzstan                       | AS    | 30,31 | 17    | 135
 EY                        | Tajikistan                       | AS    | 30    | 17    | 262
 EZ                        | Turkmenistan                     | AS    | 30    | 17    | 280
-F                         | France                           | EU    | 27    | 14    | 227
+F, T                      | France                           | EU    | 27    | 14    | 227
 FG, TO                    | Guadeloupe                       | NA    | 11    | 08    | 079
 FH, TO                    | Mayotte                          | AF    | 53    | 39    | 169
 FJ, TO                    | Saint Barthelemy                 | NA    | 11    | 08    | 516

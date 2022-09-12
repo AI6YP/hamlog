@@ -131,7 +131,7 @@ function convert (arr) {
     res = [];
     obj = {};
     arr.forEach(function (e) {
-        if (e.key === 'EOR') {
+        if (e.key === 'EOR' || e.key === 'eor') {
             res.push(obj);
             obj = {};
         } else {
